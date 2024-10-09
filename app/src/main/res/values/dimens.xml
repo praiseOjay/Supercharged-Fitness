@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Toolbar-->
+    <dimen name="toolbar_title_text">18sp</dimen>
+    <dimen name="toolbar_img_padding">4dp</dimen>
+
+    <!-- all screen margin-->
+    <dimen name="main_margin_left">8dp</dimen>
+    <dimen name="main_margin_right">8dp</dimen>
+    <dimen name="main_margin_top">8dp</dimen>
+    <dimen name="main_margin_bottom">8dp</dimen>
+
+    <!--  Drawer -->
+    <dimen name="drawer_txt_size">17sp</dimen>
+
+    <!-- Home work out row-->
+    <!--<dimen name="home_workout_row_img_height">180dp</dimen>-->
+    <dimen name="home_workout_row_detail_text">14sp</dimen>
+    <dimen name="home_workout_row_main_title_text">18sp</dimen>
+    <dimen name="home_workout_row_title_text">16sp</dimen>
+    <dimen name="workout_row_padding">8dp</dimen>
+    <dimen name="workout_row_padding_two">2dp</dimen>
+    <dimen name="workout_txt_margin_bottom">4dp</dimen>
+    <dimen name="workout_list_details_txt">16sp</dimen>
+
+    <!-- Workout list activity and row -->
+    <dimen name="workout_list_row_padding">8dp</dimen>
+    <dimen name="font_eighteen">18sp</dimen>
+
+    <!-- Recycler view related -->
+    <integer name="rcy_item_divider">12</integer>
+
+    <!-- Workout activity -->
+    <dimen name="rlt_top_bottom_padding">16dp</dimen>
+    <dimen name="rlt_top_btn_left_right_margin">8dp</dimen>
+    <dimen name="rlt_bottom_btn_left_right_margin">16dp</dimen>
+    <dimen name="rlt_top_btn_padding">4dp</dimen>
+    <dimen name="progress_text_size">26sp</dimen>
+    <dimen name="dp10">10dp</dimen>
+    <dimen name="dp30">30dp</dimen>
+
+    <!-- Animation duration -->
+    <integer name="slide_animation_duration">300</integer>
+    <integer name="viewfliper_animation">700</integer>
+    <dimen name="bg_all_color_radius">7dp</dimen>
+    <dimen name="dp3">3dp</dimen>
+
+    <dimen name="space_0_5dp" >0.5dp</dimen >
+    <dimen name="space_0dp" >0dp</dimen >
+    <dimen name="space_1dp" >1dp</dimen >
+    <dimen name="space_2dp" >2dp</dimen >
+    <dimen name="space_3dp" >3dp</dimen >
+    <dimen name="space_4dp" >4dp</dimen >
+    <dimen name="space_5dp" >5dp</dimen >
+    <dimen name="space_6dp">6dp</dimen>
+    <dimen name="space_8dp" >8dp</dimen >
+    <dimen name="space_10dp" >10dp</dimen >
+    <dimen name="space_12dp" >12dp</dimen >
+    <dimen name="space_14dp" >14dp</dimen >
+    <dimen name="space_17dp" >17dp</dimen >
+    <dimen name="space_16dp" >16dp</dimen >
+    <dimen name="space_18dp" >18dp</dimen >
+    <dimen name="space_20dp" >20dp</dimen >
+    <dimen name="space_24dp" >24dp</dimen >
+    <dimen name="space_32dp" >32dp</dimen >
+    <dimen name="space_64dp">64dp</dimen>
+
+    <!-- Text size counting -->
+    <dimen name="text_size_12">12sp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_18">18sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_22">22sp</dimen>
+    <dimen name="text_size_24" >24sp</dimen >
+    <dimen name="text_size_26" >26sp</dimen >
+    <dimen name="text_size_28" >28sp</dimen >
+    <dimen name="text_size_30">30sp</dimen>
+    <dimen name="text_size_32">32sp</dimen>
+    <dimen name="text_size_34">34sp</dimen>
+    <dimen name="text_size_36">36sp</dimen>
+    <dimen name="_50dp">50dp</dimen>
+
+
+</resources>

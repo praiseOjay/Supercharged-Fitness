@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="8dp"
+    android:paddingTop="8dp"
+
+    android:paddingEnd="8dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rltWorkOutTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/txtWorkoutTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/main_margin_left"
+            android:gravity="bottom"
+            android:textStyle="bold"
+            android:paddingTop="@dimen/workout_row_padding"
+            android:text="@string/demo_text"
+            android:textSize="@dimen/home_workout_row_main_title_text" />
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/RltWorkOutDetails"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:cardCornerRadius="6dp"
+        app:cardElevation="0dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_workout_row_img_height"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imgWorkoutRow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/home_workout_row_img_height"
+            android:background="@android:color/transparent"
+            android:src="@color/colorAccent"
+            android:scaleType="centerCrop" />
+
+        <TextView
+            android:id="@+id/txtWorkoutCategoryTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_16dp"
+            android:layout_marginTop="@dimen/space_16dp"
+            android:layout_marginBottom="@dimen/workout_txt_margin_bottom"
+            android:fontFamily="@font/bebas"
+            android:text="@string/demo_text"
+            android:padding="@dimen/space_3dp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/home_workout_row_title_text" />
+
+        <TextView
+            android:id="@+id/txtWorkoutDetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtWorkoutCategoryTitle"
+            android:layout_alignParentBottom="false"
+            android:layout_marginStart="@dimen/space_16dp"
+            android:layout_marginBottom="@dimen/main_margin_bottom"
+            android:fontFamily="@font/bebas"
+            android:padding="@dimen/space_3dp"
+            android:text="@string/demo_text"
+            android:textColor="@color/white"
+            android:textSize="@dimen/home_workout_row_detail_text" />
+
+        <ImageView
+            android:id="@+id/imgWorkoutDeificulty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_beginner_level"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="8dp"
+            />
+
+    </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+<!--
+    <com.google.android.ads.nativetemplates.TemplateView
+        android:id="@+id/nativeAd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_margin="@dimen/dp10"
+        app:gnt_template_type="@layout/gnt_medium_template_view" />
+-->
+
+
+</RelativeLayout>

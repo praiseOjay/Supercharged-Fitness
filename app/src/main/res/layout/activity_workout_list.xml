@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.superChargedFitness.activity.WorkoutListActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RelativeLayout
+            android:id="@+id/rltToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/workout_list_title_height"
+            android:background="@color/color_toolbar_bg">
+
+            <ImageView
+                android:id="@+id/imgToolbarBack"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/workout_list_title_height"
+                android:background="@android:color/transparent"
+                android:scaleType="centerCrop" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorBlackTrans"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/imgWorkOutListBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="32dp"
+                android:background="@android:color/transparent"
+                android:padding="@dimen/toolbar_img_padding"
+                android:src="@drawable/ic_back"
+                android:tint="@color/color_white" />
+
+            <TextView
+                android:id="@+id/txtWorkoutListCategoryName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="34dp"
+                android:layout_toEndOf="@+id/imgWorkOutListBack"
+                android:text="@string/demo_text"
+                android:textAllCaps="true"
+                android:textColor="@color/color_toolbar_text"
+                android:textSize="@dimen/toolbar_title_text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/txtWorkoutListCategoryDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtWorkoutListCategoryName"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/imgWorkOutListBack"
+                android:text="@string/demo_text"
+                android:textColor="@color/color_toolbar_text"
+                android:textSize="@dimen/workout_list_details_txt"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imgWorkoutDificultyImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtWorkoutListCategoryDetails"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_toEndOf="@+id/imgWorkOutListBack"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_beginner_level" />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcyWorkoutList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/btnStartWorkout"
+            android:layout_below="@+id/rltToolbar"
+            android:background="@color/color_gray"
+            android:scrollbars="none" />
+
+        <Button
+            android:id="@+id/btnStartWorkout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/color_theme"
+            android:text="@string/start_workout"
+            android:textColor="@color/color_white"
+            android:textSize="@dimen/font_eighteen"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/llAdView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/llAdViewFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50dp"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        android:visibility="gone" />
+</LinearLayout>

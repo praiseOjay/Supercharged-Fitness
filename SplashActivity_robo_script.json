@@ -1,0 +1,1075 @@
+[
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667179126,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/imgbtnDrawer",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/rltToolbar",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "LIST_ITEM_CLICKED",
+    "timestamp": 1681667184463,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": true,
+    "elementDescriptors": [
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": 0,
+        "groupViewChildPosition": -1,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.ListView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 4,
+        "resourceId": "com.superChargedFitness:id/listOfMenuItem",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667196138,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": 4,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": -1,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "androidx.recyclerview.widget.RecyclerView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/rcyWorkout",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667199270,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": 0,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": -1,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "androidx.recyclerview.widget.RecyclerView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 1,
+        "resourceId": "com.superChargedFitness:id/rcyWorkoutList",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667203117,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/imgbtnNext",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 3,
+        "resourceId": "com.superChargedFitness:id/rltBottomControl",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667205966,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/imgbtnNext",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 3,
+        "resourceId": "com.superChargedFitness:id/rltBottomControl",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667208374,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/imgbtnPrev",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 3,
+        "resourceId": "com.superChargedFitness:id/rltBottomControl",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667212730,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/imgbtnPrev",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 3,
+        "resourceId": "com.superChargedFitness:id/rltBottomControl",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667215342,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/imgbtnBack",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667217934,
+    "replacementText": "Start Workout",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatButton",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/btnStartWorkout",
+        "contentDescription": "",
+        "text": "Start Workout"
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/llMain",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667222917,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/imgSound",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/rltTop",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667224429,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/imgSound",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/rltTop",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667228601,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 1,
+        "resourceId": "com.superChargedFitness:id/imgInfo",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/rltTop",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667232012,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/imgbtnBack",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667236200,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/imgVideo",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/rltTop",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667272700,
+    "replacementText": "Skip",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatButton",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 1,
+        "resourceId": "com.superChargedFitness:id/btnSkip",
+        "contentDescription": "",
+        "text": "Skip"
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667278309,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatTextView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 1,
+        "resourceId": "com.superChargedFitness:id/imgbtnDone",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/rltStepTypeWorkOut",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 3,
+        "resourceId": "com.superChargedFitness:id/rltBottomControl",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667286674,
+    "replacementText": "Skip",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatButton",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 1,
+        "resourceId": "com.superChargedFitness:id/btnSkip",
+        "contentDescription": "",
+        "text": "Skip"
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667289475,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageButton",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/imgbtnNext",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/rltStepTypeWorkOut",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 3,
+        "resourceId": "com.superChargedFitness:id/rltBottomControl",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667294631,
+    "replacementText": "Skip",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatButton",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 1,
+        "resourceId": "com.superChargedFitness:id/btnSkip",
+        "contentDescription": "",
+        "text": "Skip"
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667297629,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/imgBack",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/rltTop",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667300589,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "com.superChargedFitness:id/imgWorkOutListBack",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/rltToolbar",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667304540,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/imgbtnDrawer",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/rltToolbar",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "LIST_ITEM_CLICKED",
+    "timestamp": 1681667307496,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": true,
+    "elementDescriptors": [
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": 2,
+        "groupViewChildPosition": -1,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.ListView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 4,
+        "resourceId": "com.superChargedFitness:id/listOfMenuItem",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667311413,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/imgbtnDrawer",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/rltToolbar",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "LIST_ITEM_CLICKED",
+    "timestamp": 1681667313182,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": true,
+    "elementDescriptors": [
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": 1,
+        "groupViewChildPosition": -1,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.ListView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 4,
+        "resourceId": "com.superChargedFitness:id/listOfMenuItem",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667318810,
+    "replacementText": "",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatImageView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/imgbtnDrawer",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "com.superChargedFitness:id/rltToolbar",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.RelativeLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667323709,
+    "replacementText": "Exit",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": false,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatTextView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 1,
+        "resourceId": "com.superChargedFitness:id/txtExit",
+        "contentDescription": "",
+        "text": "Exit"
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 2,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.LinearLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 1,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  },
+  {
+    "eventType": "VIEW_CLICKED",
+    "timestamp": 1681667327261,
+    "replacementText": "Yes",
+    "actionCode": -1,
+    "delayTime": 0,
+    "canScrollTo": true,
+    "elementDescriptors": [
+      {
+        "className": "androidx.appcompat.widget.AppCompatButton",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 3,
+        "resourceId": "android:id/button1",
+        "contentDescription": "",
+        "text": "Yes"
+      },
+      {
+        "className": "androidx.appcompat.widget.ButtonBarLayout",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 0,
+        "resourceId": "",
+        "contentDescription": "",
+        "text": ""
+      },
+      {
+        "className": "android.widget.ScrollView",
+        "recyclerViewChildPosition": -1,
+        "adapterViewChildPosition": -1,
+        "groupViewChildPosition": 3,
+        "resourceId": "com.superChargedFitness:id/buttonPanel",
+        "contentDescription": "",
+        "text": ""
+      }
+    ]
+  }
+]

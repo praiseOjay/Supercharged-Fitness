@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.superChargedFitness.activity.WorkoutListDetailsActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/imgbtnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:padding="8dp"
+            android:src="@drawable/ic_back"
+            android:tint="@color/color_theme" />
+
+        <ImageView
+            android:id="@+id/imgbtnVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:src="@drawable/ic_video_white" />
+
+        <!--<android.support.v4.view.ViewPager-->
+        <com.superChargedFitness.utils.NonSwipeAbleViewPager
+            android:id="@+id/viewPagerWorkoutDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/rltBottomControl"
+            android:layout_below="@+id/imgbtnVideo"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp" />
+
+        <RelativeLayout
+            android:id="@+id/rltBottomControl"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_alignParentBottom="true">
+
+            <ImageView
+                android:id="@+id/imgbtnPrev"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_pre" />
+
+            <TextView
+                android:id="@+id/imgbtnDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/bebas"
+                android:gravity="center"
+                android:text="@string/step_demo_text"
+                android:textSize="26sp" />
+
+            <ImageView
+                android:id="@+id/imgbtnNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_next" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/llAdView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:background="@color/colorGrayTrans"
+        android:gravity="center"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/llAdViewFacebook"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50dp"
+        android:background="@color/colorGrayTrans"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/space_10dp"
+        android:visibility="gone" />
+</LinearLayout>

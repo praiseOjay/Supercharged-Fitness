@@ -1,0 +1,58 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
+
+        <item name="android:statusBarColor">@color/white</item>
+        <!--        <item name="android:windowTranslucentStatus">true</item>-->
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:windowDisablePreview">false</item>
+
+    </style>
+
+
+    <style name="AppTheme_Splash" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowBackground">@drawable/sf_bg</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:ignore="NewApi">shortEdges</item>
+        <item name="android:enforceNavigationBarContrast" tools:ignore="NewApi">false</item>
+    </style>
+
+
+    <style name="AppTheme_Main" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:windowDisablePreview">true</item>
+
+    </style>
+    <style name="AppTheme_WorkoutList" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:textColor">@color/color_black</item>
+        <item name="android:windowDisablePreview">false</item>
+
+    </style>
+</resources>

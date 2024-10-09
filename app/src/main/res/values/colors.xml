@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorAccent">#ff0202</color>
+
+    <!-- Toolbar -->
+    <color name="color_toolbar_text">#ffffff</color>
+    <color name="color_toolbar_bg">#ff0202</color>
+
+    <color name="color_theme">#FF0202</color>
+    <color name="color_theme_new">#1c2135</color>
+    <color name="color_gray">#aeaeae</color>
+
+    <!-- drawer -->
+    <color name="colorWhiteTran">#8BFFFFFF</color>
+    <color name="color_drawer_text">#000000</color>
+    <color name="color_drawer_bg">#ff0202</color>
+
+    <color name="color_beginner">#ff9a02</color>
+    <color name="color_intermediate">#359aff</color>
+    <color name="color_advance">#ff3535</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="colorWhite">#FFFFFF</color>
+
+    <color name="dark_gray">#00ffffff</color>
+    <color name="color_black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="colorBlackTrans">#87000000</color>
+    <color name="colorDrawerBg2">#F8F8F8</color>
+    <color name="transparent">#00ffffff</color>
+    <color name="colorGray">#aeaeae</color>
+    <color name="colorGrayTrans">#fafafa</color>
+    <color name="notification_theme">#80DEEA</color>
+</resources>

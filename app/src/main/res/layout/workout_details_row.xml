@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools">
+
+    <ViewFlipper
+        android:id="@+id/imgWorkoutDemo"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:paddingStart="@dimen/workout_list_row_padding"
+        android:paddingTop="@dimen/workout_list_row_padding"
+        android:paddingEnd="@dimen/workout_list_row_padding" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/lny_ad"
+        android:layout_below="@+id/imgWorkoutDemo"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="24dp"
+        android:paddingStart="@dimen/workout_list_row_padding"
+        android:paddingEnd="@dimen/workout_list_row_padding">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lny_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtWorkoutTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:lineSpacingExtra="5dp"
+                    android:text="@string/demo_text"
+                    android:textAllCaps="true"
+                    android:textColor="@color/color_theme"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtWorkoutDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/demo_text"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <com.google.android.ads.nativetemplates.TemplateView
+                android:id="@+id/nativeAdDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginHorizontal="@dimen/space_5dp"
+                android:layout_marginVertical="@dimen/space_20dp"
+                app:gnt_template_type="@layout/gnt_medium_template_view" />
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/lny_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:gravity="center"
+        android:visibility="gone">
+
+        <com.google.android.gms.ads.AdView
+            android:id="@+id/adView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            ads:adSize="LARGE_BANNER" />
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "934328822036",
+    "project_id": "superchargedfitness-f55cd",
+    "storage_bucket": "superchargedfitness-f55cd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934328822036:android:4fc4fe307511b1067c7a01",
+        "android_client_info": {
+          "package_name": "com.superChargedFitness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "934328822036-gp76o00suqf8af9ijkahckknr56fjgqt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6x03Om3Fct_SMAes455w9BfDVePmNHeE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "934328822036-gp76o00suqf8af9ijkahckknr56fjgqt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
