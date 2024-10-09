@@ -74,4 +74,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 Praise Ojerinola - ojerinolapraise@gmail.com
 
-Project Link: [https://github.com/yourusername/supercharged-fitness-app](https://github.com/yourusername/supercharged-fitness-app)
+Project Link: https://github.com/praiseOjay/Supercharged-Fitness.git
