@@ -8,7 +8,9 @@ import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Point
 import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import android.util.TypedValue
 import android.view.*
@@ -18,14 +20,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.superChargedFitness.R
+import com.superChargedFitness.databinding.ActivityBaseBinding
 import com.superChargedFitness.interfaces.CallbackListener
 import com.superChargedFitness.interfaces.ConfirmDialogCallBack
-import kotlinx.android.synthetic.main.activity_base.*
 import java.util.*
 
 open class BaseActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
     ConfirmDialogCallBack {
 
+    private lateinit var baseBinding: ActivityBaseBinding
     lateinit var drawerLayout: DrawerLayout
     private lateinit var context: Context
     private lateinit var listOfMenuItem: ListView
@@ -34,20 +37,34 @@ open class BaseActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
     lateinit var menuAdapter: BaseActivity.MenuAdapter
 
     override fun setContentView(layoutResID: Int) {
-        drawerLayout = LayoutInflater.from(this).inflate(R.layout.activity_base, null) as DrawerLayout
-        val activityContainer = drawerLayout.findViewById(R.id.activity_content) as FrameLayout
+        baseBinding = ActivityBaseBinding.inflate(layoutInflater)
+        drawerLayout = baseBinding.root
+        val activityContainer = baseBinding.activityContent
         LayoutInflater.from(this).inflate(layoutResID, activityContainer, true)
         super.setContentView(drawerLayout)
+        initializeBase()
+    }
+
+    override fun setContentView(view: View?) {
+        baseBinding = ActivityBaseBinding.inflate(layoutInflater)
+        drawerLayout = baseBinding.root
+        val activityContainer = baseBinding.activityContent
+        activityContainer.addView(view)
+        super.setContentView(drawerLayout)
+        initializeBase()
+    }
+
+    private fun initializeBase() {
         context = this
-        listOfMenuItem = findViewById(R.id.listOfMenuItem)
+        listOfMenuItem = baseBinding.listOfMenuItem
 
         setCommunicationListAdapter()
-        txtExit.setOnClickListener {
+        baseBinding.txtExit.setOnClickListener {
             drawerLayout.closeDrawer(GravityCompat.START)
             confirmationDialog(this, this, "", getString(R.string.exit_confirmation))
         }
 
-        llBase.post(Runnable {
+        baseBinding.llBase.post(Runnable {
             val resources: Resources = resources
             val width = TypedValue.applyDimension(
                     TypedValue.COMPLEX_UNIT_DIP,
@@ -55,18 +72,10 @@ open class BaseActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
                     resources.getDisplayMetrics()
             )
             val params =
-                    llBase.getLayoutParams()
+                    baseBinding.llBase.layoutParams
             params.width = width.toInt()
-            llBase.setLayoutParams(params)
+            baseBinding.llBase.layoutParams = params
         })
-
-        /*if (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE,"") == ConstantString.AD_GOOGLE
-                && com.superChargedFitness.utils.Utils.getPref(this,ConstantString.STATUS_ENABLE_DISABLE,"") == ConstantString.ENABLE) {
-            CommonConstantAd.googlebeforloadAd(this)
-        } else if (com.superChargedFitness.utils.Utils.getPref(this,ConstantString.AD_TYPE_FB_GOOGLE,"") == ConstantString.AD_FACEBOOK
-                && com.superChargedFitness.utils.Utils.getPref(this,ConstantString.STATUS_ENABLE_DISABLE,"") == ConstantString.ENABLE) {
-            CommonConstantAd.facebookbeforeloadFullAd(this)
-        }*/
     }
 
     private fun setCommunicationListAdapter() {
@@ -120,12 +129,12 @@ open class BaseActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
 
     @SuppressLint("WrongConstant")
     override fun onItemClick(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-        drawerLayout.closeDrawer(Gravity.START)
-        when {
-            arrDrawerItem[position] === "Contact Us" -> contactUs()
-            arrDrawerItem[position] === "Rate Us" -> rateUs()
-            arrDrawerItem[position] === "Share App" -> shareAppLink()
-            arrDrawerItem[position] === "Home" -> drawerLayout.closeDrawer(Gravity.START)
+        drawerLayout.closeDrawer(GravityCompat.START)
+        when (arrDrawerItem[position]) {
+            "Contact Us" -> contactUs()
+            "Rate Us" -> rateUs()
+            "Share App" -> shareAppLink()
+            "Home" -> drawerLayout.closeDrawer(GravityCompat.START)
         }
     }
 
@@ -147,7 +156,7 @@ open class BaseActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
     private fun shareAppLink() {
         val shareIntent = Intent()
         shareIntent.action = Intent.ACTION_SEND
-        val link = "https://play.google.com/store/apps/details?id=${"packageName"}"
+        val link = "https://play.google.com/store/apps/details?id=${packageName}"
         shareIntent.putExtra(Intent.EXTRA_TEXT, link)
         shareIntent.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.app_name)+" - Android")
         shareIntent.type = "text/plain"
@@ -160,8 +169,7 @@ open class BaseActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
             sendIntentGmail.type = "plain/text"
             sendIntentGmail.setPackage("com.google.android.gm")
             sendIntentGmail.putExtra(Intent.EXTRA_EMAIL, arrayOf("OjerinolaPraise@gmail.com"))
-            if (resources.getString(R.string.app_name) != null)
-                sendIntentGmail.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.app_name)+" - Android")
+            sendIntentGmail.putExtra(Intent.EXTRA_SUBJECT, resources.getString(R.string.app_name)+" - Android")
             startActivity(sendIntentGmail)
         }  catch (e: ActivityNotFoundException){
             e.printStackTrace()
@@ -197,10 +205,6 @@ open class BaseActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
     fun getNavigationSize(context: Context): Int {
         val resources = context.resources
         val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-        Log.e(
-                "TAG",
-                "getNavigationSize:IFF:::  ${resources.getDimensionPixelSize(resourceId)}      ${isSoftNavigationBarAvailable()} "
-        )
         return if (isSoftNavigationBarAvailable()) {
             if (resourceId > 0) {
                 resources.getDimensionPixelSize(resourceId)
@@ -213,21 +217,21 @@ open class BaseActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
     }
 
     private fun Context.isSoftNavigationBarAvailable(): Boolean {
-        val navBarInteractionModeId = resources.getIdentifier(
-                "config_navBarInteractionMode",
-                "integer",
-                "android"
-        )
-        if (navBarInteractionModeId > 0 && resources.getInteger(navBarInteractionModeId) > 0) {
-            // nav gesture is enabled in the settings
-            return false
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            val windowMetrics = (getSystemService(Context.WINDOW_SERVICE) as WindowManager).currentWindowMetrics
+            val insets = windowMetrics.windowInsets.getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars())
+            insets.bottom > 0
+        } else {
+            val appUsableScreenSize = Point()
+            val realScreenSize = Point()
+            @Suppress("DEPRECATION")
+            val defaultDisplay = (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
+            @Suppress("DEPRECATION")
+            defaultDisplay.getSize(appUsableScreenSize)
+            @Suppress("DEPRECATION")
+            defaultDisplay.getRealSize(realScreenSize)
+            appUsableScreenSize.y < realScreenSize.y
         }
-        val appUsableScreenSize = Point()
-        val realScreenSize = Point()
-        val defaultDisplay = (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay
-        defaultDisplay.getSize(appUsableScreenSize)
-        defaultDisplay.getRealSize(realScreenSize)
-        return appUsableScreenSize.y < realScreenSize.y
     }
 
     fun confirmationDialog(
@@ -278,25 +282,20 @@ open class BaseActivity : AppCompatActivity(), AdapterView.OnItemClickListener,
     }
 
     fun isNetworkConnected(): Boolean {
-        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
-    }
-    private fun isOnline(): Boolean {
-        var outcome = false
-        try {
-            val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-            val networkInfo = cm.allNetworkInfo
-            for (tempNetworkInfo in networkInfo) {
-                if (tempNetworkInfo.isConnected) {
-                    outcome = true
-                    break
-                }
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
+        val connectivityManager = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+        } else {
+            @Suppress("DEPRECATION")
+            val networkInfo = connectivityManager.activeNetworkInfo
+            return networkInfo != null && networkInfo.isConnected
         }
+    }
 
-        return outcome
+    private fun isOnline(): Boolean {
+        return isNetworkConnected()
     }
 
 

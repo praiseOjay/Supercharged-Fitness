@@ -5,9 +5,8 @@ import android.app.Application
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.OnLifecycleEvent
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.google.android.gms.ads.*
 import com.google.android.gms.ads.appopen.AppOpenAd
@@ -16,14 +15,14 @@ import com.superChargedFitness.R
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig
 import java.util.*
 
-class AppControl : Application()  , Application.ActivityLifecycleCallbacks, LifecycleObserver {
+class AppControl : Application()  , Application.ActivityLifecycleCallbacks, DefaultLifecycleObserver {
 
     private lateinit var appOpenAdManager: AppOpenAdManager
     private var currentActivity: Activity? = null
     private  val LOG_TAG = "AppOpenAdManager"
 
     override fun onCreate() {
-        super.onCreate()
+        super<Application>.onCreate()
         FirebaseApp.initializeApp(this);
         CalligraphyConfig.initDefault(CalligraphyConfig.Builder()
                 .setDefaultFontPath("aoo_font.otf")
@@ -39,10 +38,12 @@ class AppControl : Application()  , Application.ActivityLifecycleCallbacks, Life
         MobileAds.initialize(this) {}
         ProcessLifecycleOwner.get().lifecycle.addObserver(this)
         appOpenAdManager = AppOpenAdManager()
+
+        // Schedule background workers
+        com.superChargedFitness.worker.WorkoutWorkScheduler.scheduleAllWork(this)
     }
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onMoveToForeground() {
+    override fun onStart(owner: LifecycleOwner) {
         currentActivity?.let {
             if (com.superChargedFitness.utils.Utils.getPref(this,ConstantString.AD_TYPE_FB_GOOGLE,"") == ConstantString.AD_GOOGLE&&
                 com.superChargedFitness.utils.Utils.getPref(this,ConstantString.STATUS_ENABLE_DISABLE,"") == ConstantString.ENABLE) {
@@ -105,7 +106,6 @@ class AppControl : Application()  , Application.ActivityLifecycleCallbacks, Life
                 context,
                 id,
                 request,
-                AppOpenAd.APP_OPEN_AD_ORIENTATION_PORTRAIT,
                 object : AppOpenAd.AppOpenAdLoadCallback() {
                     override fun onAdLoaded(ad: AppOpenAd) {
                         appOpenAd = ad

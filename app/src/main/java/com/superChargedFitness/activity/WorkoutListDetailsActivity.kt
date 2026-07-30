@@ -8,31 +8,43 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.viewModels
+import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
+import android.os.Build
 import com.bumptech.glide.Glide
 import com.google.android.ads.nativetemplates.TemplateView
 import com.google.android.gms.ads.AdView
 import com.superChargedFitness.R
-import com.superChargedFitness.database.DataHelper
+import com.superChargedFitness.databinding.ActivityWorkoutListDetailsBinding
 import com.superChargedFitness.pojo.PWorkOutDetails
 import com.superChargedFitness.utils.ConstantString
-import kotlinx.android.synthetic.main.activity_workout_list_details.*
 
 class WorkoutListDetailsActivity : BaseActivity() {
+
+    private val workoutViewModel: com.superChargedFitness.viewmodel.WorkoutViewModel by viewModels()
 
     lateinit var workOutCategoryData: ArrayList<PWorkOutDetails>
     lateinit var mContext: Context
     private var currentPos: Int = 0
     private var typeOfControl:String = ""
+    private lateinit var binding: ActivityWorkoutListDetailsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_workout_list_details)
+        binding = ActivityWorkoutListDetailsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         mContext = this
 
-        window.statusBarColor = resources.getColor(R.color.colorGrayTrans)
-        workOutCategoryData = intent.getSerializableExtra(ConstantString.key_workout_list_array) as ArrayList<PWorkOutDetails>
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorGrayTrans)
+        @Suppress("DEPRECATION", "UNCHECKED_CAST")
+        workOutCategoryData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra(ConstantString.key_workout_list_array, ArrayList::class.java) as ArrayList<PWorkOutDetails>
+        } else {
+            intent.getSerializableExtra(ConstantString.key_workout_list_array) as ArrayList<PWorkOutDetails>
+        }
         currentPos = intent.getIntExtra(ConstantString.key_workout_list_pos, 0)
         typeOfControl = intent.getStringExtra(ConstantString.key_workout_details_type) as String
 
@@ -40,22 +52,12 @@ class WorkoutListDetailsActivity : BaseActivity() {
 
         initAction()
 
-        /*if (Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "") == ConstantString.AD_GOOGLE &&
-                Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, "") == ConstantString.ENABLE) {
-            CommonConstantAd.loadBannerGoogleAd(this, llAdView, ConstantString.GOOGLE_BANNER_TYPE_AD)
-            llAdViewFacebook.visibility = View.GONE
-            llAdView.visibility = View.VISIBLE
-        } else if (Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "") == ConstantString.AD_FACEBOOK
-                &&
-                Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, "") == ConstantString.ENABLE) {
-            llAdViewFacebook.visibility = View.VISIBLE
-            llAdView.visibility = View.GONE
-            CommonConstantAd.loadFacebookBannerAd(this, llAdViewFacebook)
-        } else {
-            llAdView.visibility = View.GONE
-            llAdViewFacebook.visibility = View.GONE
-        }*/
-
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finish()
+                overridePendingTransition(R.anim.none, R.anim.slide_down)
+            }
+        })
     }
 
 
@@ -63,46 +65,49 @@ class WorkoutListDetailsActivity : BaseActivity() {
     /* Todo Common settings methods */
     private fun defaultSetup() {
         val doWorkOutPgrAdpt = DoWorkoutPagerAdapter()
-        viewPagerWorkoutDetails.adapter = doWorkOutPgrAdpt
-        viewPagerWorkoutDetails.currentItem = currentPos
-        imgbtnDone.text = (1 + currentPos).toString().plus(" / ").plus(workOutCategoryData.size)
+        binding.viewPagerWorkoutDetails.adapter = doWorkOutPgrAdpt
+        binding.viewPagerWorkoutDetails.currentItem = currentPos
+        binding.imgbtnDone.text = (1 + currentPos).toString().plus(" / ").plus(workOutCategoryData.size)
 
         if(typeOfControl != ConstantString.val_is_workout_list_activity){
-            rltBottomControl.visibility = View.GONE
+            binding.rltBottomControl.visibility = View.GONE
         }
 
     }
 
     private fun initAction() {
-        imgbtnBack.setOnClickListener {
+        binding.imgbtnBack.setOnClickListener {
             onBackPressed()
             //overridePendingTransition(R.anim.none, R.anim.slide_down)
         }
-        imgbtnNext.setOnClickListener {
-            if (viewPagerWorkoutDetails.currentItem < workOutCategoryData.size)
-                viewPagerWorkoutDetails.currentItem = viewPagerWorkoutDetails.currentItem + 1
+        binding.imgbtnNext.setOnClickListener {
+            if (binding.viewPagerWorkoutDetails.currentItem < workOutCategoryData.size)
+                binding.viewPagerWorkoutDetails.currentItem = binding.viewPagerWorkoutDetails.currentItem + 1
         }
-        imgbtnPrev.setOnClickListener {
-            if (viewPagerWorkoutDetails.currentItem > 0)
-                viewPagerWorkoutDetails.currentItem = viewPagerWorkoutDetails.currentItem - 1
+        binding.imgbtnPrev.setOnClickListener {
+            if (binding.viewPagerWorkoutDetails.currentItem > 0)
+                binding.viewPagerWorkoutDetails.currentItem = binding.viewPagerWorkoutDetails.currentItem - 1
         }
-        imgbtnVideo.setOnClickListener {
+        // Observe video link results from ViewModel
+        workoutViewModel.videoLink.observe(this) { strVideoLink ->
             try {
-                val dbHelper = DataHelper(mContext)
-                val strVideoLink = dbHelper.getVideoLink(com.superChargedFitness.utils.Utils.ReplaceSpacialCharacters(workOutCategoryData[viewPagerWorkoutDetails.currentItem].title))
-                if(strVideoLink != "") {
+                if (strVideoLink.isNotEmpty()) {
                     val str = "https://www.youtube.com/watch?v=$strVideoLink"
                     openYoutube(str)
-                } else{
-                    Toast.makeText(this,getString(R.string.error_video_not_exist),Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, getString(R.string.error_video_not_exist), Toast.LENGTH_SHORT).show()
                 }
-            } catch (e: ActivityNotFoundException){
+            } catch (e: ActivityNotFoundException) {
                 e.printStackTrace()
-                Toast.makeText(this,"Youtube player not available on this device",Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Youtube player not available on this device", Toast.LENGTH_LONG).show()
             }
-//            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=" + strVideoLink)))
         }
-        viewPagerWorkoutDetails.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+
+        binding.imgbtnVideo.setOnClickListener {
+            val title = com.superChargedFitness.utils.Utils.ReplaceSpacialCharacters(workOutCategoryData[binding.viewPagerWorkoutDetails.currentItem].title)
+            workoutViewModel.loadVideoLink(title)
+        }
+        binding.viewPagerWorkoutDetails.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(p0: Int, p1: Float, p2: Int) {
                 //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
@@ -112,14 +117,14 @@ class WorkoutListDetailsActivity : BaseActivity() {
             }
 
             override fun onPageSelected(pos: Int) {
-                imgbtnDone.text = (1 + pos).toString().plus(" / ").plus(workOutCategoryData.size)
+                binding.imgbtnDone.text = (1 + pos).toString().plus(" / ").plus(workOutCategoryData.size)
             }
         })
     }
 
     override fun onBackPressed() {
+        @Suppress("DEPRECATION")
         super.onBackPressed()
-        overridePendingTransition(R.anim.none, R.anim.slide_down)
     }
 
     /* Todo adapter */

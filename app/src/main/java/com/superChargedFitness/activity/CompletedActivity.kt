@@ -1,15 +1,21 @@
 package com.superChargedFitness.activity
 
-import android.app.ProgressDialog
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import com.superChargedFitness.R
 import com.superChargedFitness.pojo.PWorkOutDetails
@@ -18,6 +24,7 @@ import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
+import java.io.Serializable
 
 open class CompletedActivity : BaseActivity() {
 
@@ -31,13 +38,13 @@ open class CompletedActivity : BaseActivity() {
     lateinit var txtDurationTime: TextView
     lateinit var rltLevelComplete: LinearLayout
     internal var uri: Uri? = null
-    lateinit var progressDialog: ProgressDialog
+    private var progressDialog: AlertDialog? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_completed)
-        window.statusBarColor = resources.getColor(R.color.colorAccent)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorAccent)
         context = this
         rltLevelComplete = findViewById(R.id.rltLevelComplete)
         txtDurationTime = findViewById(R.id.txtDurationTime)
@@ -45,27 +52,12 @@ open class CompletedActivity : BaseActivity() {
         getSetIntent()
         setProgressDialog()
 
-        /*if (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "") == ConstantString.AD_GOOGLE &&
-            com.superChargedFitness.utils.Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, "") == ConstantString.ENABLE) {
-            CommonConstantAd.loadNativeAd(this, nativeAdDetail)
-        }*/
-
-        /*if (Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "") == ConstantString.AD_GOOGLE &&
-                Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, "") == ConstantString.ENABLE) {
-            CommonConstantAd.loadBannerGoogleAd(this, llAdView, ConstantString.GOOGLE_BANNER_TYPE_AD)
-            llAdViewFacebook.visibility = View.GONE
-            llAdView.visibility = View.VISIBLE
-        } else if (Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "") == ConstantString.AD_FACEBOOK
-                &&
-                Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, "") == ConstantString.ENABLE) {
-            llAdViewFacebook.visibility = View.VISIBLE
-            llAdView.visibility = View.GONE
-            CommonConstantAd.loadFacebookBannerAd(this, llAdViewFacebook)
-        } else {
-            llAdView.visibility = View.GONE
-            llAdViewFacebook.visibility = View.GONE
-        }*/
-
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                saveData()
+                finish()
+            }
+        })
     }
 
     fun onClickShare(view: View) {
@@ -82,8 +74,12 @@ open class CompletedActivity : BaseActivity() {
 
     private fun getSetIntent() {
         val intent = intent
-//        txtLevelNo.text = "" + Constant.LEVEL_NO
-        pWorkoutList = intent.getSerializableExtra(ConstantString.workout_list) as ArrayList<PWorkOutDetails>
+        @Suppress("DEPRECATION", "UNCHECKED_CAST")
+        pWorkoutList = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getSerializableExtra(ConstantString.workout_list, ArrayList::class.java) as ArrayList<PWorkOutDetails>
+        } else {
+            intent.getSerializableExtra(ConstantString.workout_list) as ArrayList<PWorkOutDetails>
+        }
         tablename = intent.getStringExtra(ConstantString.table_name_from_workactivity)!!
         workoutId = intent.getStringExtra(ConstantString.workout_id_from_workactivity)!!
         txtTotalNoOfLevel.text = pWorkoutList.size.toString()
@@ -91,23 +87,21 @@ open class CompletedActivity : BaseActivity() {
     }
 
     private fun getBitmap() {
-        val handler = Handler()
-        handler.postDelayed({
-            progressDialog.show()
-            //rltLevelComplete.setBackgroundColor(Color.BLACK);
-            rltLevelComplete.isDrawingCacheEnabled = true
-            rltLevelComplete.buildDrawingCache(true)
+        val handler = Handler(Looper.getMainLooper())
+        handler.post {
+            progressDialog?.show()
             if (bitmap != null) {
                 bitmap!!.recycle()
                 bitmap = null
             }
-            bitmap = null
-            rltLevelComplete.invalidate()
-            bitmap = Bitmap.createBitmap(rltLevelComplete.drawingCache)
-            progressDialog.dismiss()
-            //rltLevelComplete.setBackgroundColor(Color.TRANSPARENT);
+            
+            bitmap = Bitmap.createBitmap(rltLevelComplete.width, rltLevelComplete.height, Bitmap.Config.ARGB_8888)
+            val canvas = Canvas(bitmap!!)
+            rltLevelComplete.draw(canvas)
+            
+            progressDialog?.dismiss()
             saveImage()
-        }, 0)
+        }
     }
 
     private fun saveImage() {
@@ -145,24 +139,39 @@ open class CompletedActivity : BaseActivity() {
         saveData()
         val intent1 = intent
         val intent = Intent(context, WorkoutActivity::class.java)
-        intent.putExtra(ConstantString.workout_list, intent1.getSerializableExtra(ConstantString.workout_list))
+        @Suppress("DEPRECATION")
+        val workouts = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent1.getSerializableExtra(ConstantString.workout_list, ArrayList::class.java)
+        } else {
+            intent1.getSerializableExtra(ConstantString.workout_list)
+        }
+        intent.putExtra(ConstantString.workout_list, workouts)
         startActivity(intent)
         finish()
     }
 
     private fun setProgressDialog() {
-        progressDialog = ProgressDialog(context)
-        progressDialog.setMessage("Please Wait")
-        progressDialog.setCancelable(false)
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER)
+        val builder = AlertDialog.Builder(context)
+        builder.setCancelable(false)
+        val progressBar = ProgressBar(context)
+        progressBar.setPadding(40, 40, 40, 40)
+        builder.setView(progressBar)
+        builder.setMessage("Please Wait")
+        progressDialog = builder.create()
     }
 
     fun saveData(){
         com.superChargedFitness.utils.Utils.setPref(this, ConstantString.PREF_LAST_UN_COMPLETE_DAY + "_" + tablename + "_" + workoutId, 0)
+        
+        // Record the last workout date for streak tracking
+        val dateFormat = java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.getDefault())
+        val today = dateFormat.format(java.util.Date())
+        val prefs = getSharedPreferences("MyPref", Context.MODE_PRIVATE)
+        prefs.edit().putString(com.superChargedFitness.worker.StreakTrackingWorker.PREF_LAST_WORKOUT_DATE, today).apply()
     }
 
     override fun onBackPressed() {
-        saveData()
+        @Suppress("DEPRECATION")
         super.onBackPressed()
     }
 

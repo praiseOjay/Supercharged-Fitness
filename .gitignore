@@ -1,11 +1,28 @@
 *.iml
 .gradle
 /local.properties
-/.idea/caches/build_file_checksums.ser
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
 .DS_Store
 /build
 /captures
 .externalNativeBuild
+.cptr
+
+# Android Studio / IntelliJ
+.idea/
+*.iws
+*.out
+*.app
+
+# VS Code
+.vscode/
+
+# AI / Task artifacts
+.artifacts/
+.continue/
+
+# Module build directories
+app/build/
+nativetemplates/build/
+
+# Log files
+*.log

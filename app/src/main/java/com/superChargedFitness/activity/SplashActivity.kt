@@ -1,38 +1,52 @@
 package com.superChargedFitness.activity
 
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
-import android.content.ServiceConnection
 import android.os.*
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.android.vending.billing.IInAppBillingService
 import com.superChargedFitness.R
+import com.superChargedFitness.billing.BillingManager
+import com.superChargedFitness.data.repository.PurchaseRepository
 import com.superChargedFitness.interfaces.AdsCallback
 import com.superChargedFitness.utils.ConstantString
-import org.json.JSONObject
 
 class SplashActivity : AppCompatActivity(), AdsCallback {
 
-    internal var bindService: Boolean = false
+    private var billingManager: BillingManager? = null
+    private lateinit var purchaseRepository: PurchaseRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-//        supportActionBar!!.hide()
 
-        val serviceIntent = Intent("com.android.vending.billing.InAppBillingService.BIND")
-        serviceIntent.setPackage("com.android.vending")
+        purchaseRepository = PurchaseRepository(this)
 
-        try {
-            bindService = bindService(serviceIntent, mServiceConn1, Context.BIND_AUTO_CREATE)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        // Check subscription status via modern BillingClient
+        billingManager = BillingManager(this, object : BillingManager.BillingEventListener {
+            override fun onBillingConnected() {
+                billingManager?.querySubscriptionStatus()
+            }
 
-//        successCall()
+            override fun onBillingDisconnected() {
+                Log.w("SplashActivity", "Billing disconnected")
+            }
+
+            override fun onPurchaseComplete(productId: String) {}
+            override fun onPurchaseAlreadyOwned() {}
+            override fun onPurchaseCancelled() {}
+
+            override fun onBillingError(message: String) {
+                Log.e("SplashActivity", "Billing error: $message")
+            }
+
+            override fun onSubscriptionStatusChecked(isSubscribed: Boolean) {
+                purchaseRepository.setPurchaseStatus(isSubscribed)
+            }
+        })
+        billingManager?.connect()
+
         startNextActivity(2000)
-//        handler.postDelayed(myRunnable, 10000);
     }
 
     fun successCall() {
@@ -46,30 +60,16 @@ class SplashActivity : AppCompatActivity(), AdsCallback {
                 }, 1500)
             } else {
                 Log.e("TAG", "successCall::::count:::ELSEEE  "+ com.superChargedFitness.utils.Utils.getPref(this, ConstantString.SPLASH_SCREEN_COUNT, 0) )
-                //checkAd()
             }
 
     }
 
     private fun checkAd() {
         if (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, "") == ConstantString.ENABLE) {
-            if (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "") == ConstantString.AD_GOOGLE) {
-                //CommonConstantAd.googlebeforloadAd(this@SplashActivity)
-                //Log.e("TAG", "checkAd:Google::::  " )
-            } else if (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "") == ConstantString.AD_FACEBOOK) {
-                //CommonConstantAd.facebookbeforeloadFullAd(this@SplashActivity)
-                //Log.e("TAG", "checkAd:Facebook:::: " )
-            }
 
             if (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, "") == ConstantString.ENABLE) {
-                Handler().postDelayed({
+                Handler(Looper.getMainLooper()).postDelayed({
                     when (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "")) {
-                        //ConstantString.AD_GOOGLE -> {
-                           // CommonConstantAd.showInterstitialAdsGoogle(this,this@SplashActivity)
-                       // }
-                       // ConstantString.AD_FACEBOOK -> {
-                            //CommonConstantAd.showInterstitialAdsFacebook(this@SplashActivity)
-                       // }
                         else -> {
                             startNextActivity(0)
                         }
@@ -79,7 +79,6 @@ class SplashActivity : AppCompatActivity(), AdsCallback {
             }else{
                 startNextActivity(0)
             }
-
 
             Log.e("TAG", "checkAd:IFFFFF:::: " + com.superChargedFitness.utils.Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, ""))
         } else {
@@ -98,90 +97,12 @@ class SplashActivity : AppCompatActivity(), AdsCallback {
             finish()
             startActivity(Intent(this, HomeActivity::class.java))
         }, time)
-
-       /* try {
-            Thread {
-                kotlin.run {
-                    synchronized(this) {
-                        Thread.sleep(time)
-                        runOnUiThread {
-                            isLoaded = true
-                            finish()
-                            startActivity(Intent(this, HomeActivity::class.java))
-                        }
-                    }
-                }
-            }.start()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }*/
-    }
-
-    //    ServiceConnection mServiceConn;
-    internal var mService: IInAppBillingService? = null
-    internal var mServiceConn1: ServiceConnection = object : ServiceConnection {
-
-        override fun onServiceConnected(name: ComponentName, service: IBinder) {
-            mService = IInAppBillingService.Stub.asInterface(service)
-            try {
-                val ownedItems = mService!!.getPurchases(3, packageName, "subs", null)
-                val response = ownedItems.getInt("RESPONSE_CODE")
-
-                //JSONArray arr = new JSONArray(ownedItems.getStringArrayList("INAPP_PURCHASE_DATA_LIST"));
-                val arrHashProduct = ArrayList<HashMap<String, String>>()
-                try {
-                    val purchaseDataList = ownedItems.getStringArrayList("INAPP_PURCHASE_DATA_LIST")
-                    if (purchaseDataList != null && purchaseDataList.size > 0) {
-                        for (i in purchaseDataList.indices) {
-                            val purchaseData = purchaseDataList[i]
-                            val jo = JSONObject(purchaseData)
-                            val skuId = jo.getString("productId")
-                            val purchaseState: Int
-                            if (jo.getString("purchaseState").isNotEmpty()) {
-                                purchaseState = Integer.parseInt(jo.getString("purchaseState"))
-                            } else {
-                                purchaseState = -1
-                            }
-                            // InApp.addPurchasedItem(rootContext, skuId, purchaseState);
-                            val valueMap = HashMap<String, String>()
-                            valueMap["productId"] = skuId
-                            valueMap["isProductPurchased"] = "" + if (purchaseState == 0) "true" else "false"
-                            arrHashProduct.add(valueMap)
-                            if (purchaseState == 0) {
-                                com.superChargedFitness.utils.Utils.setPref(this@SplashActivity, ConstantString.pref_Key_purchase_status, true)
-                                return
-                            } else {
-                                com.superChargedFitness.utils.Utils.setPref(this@SplashActivity, ConstantString.pref_Key_purchase_status, false)
-                            }
-                        }
-                    } else {
-//                        checkPurchaseStatus()
-                        com.superChargedFitness.utils.Utils.setPref(this@SplashActivity, ConstantString.pref_Key_purchase_status, false)
-                    }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            } catch (e: RemoteException) {
-                e.printStackTrace()
-            }
-        }
-
-        override fun onServiceDisconnected(name: ComponentName) {
-            mService = null
-        }
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
         handler.removeCallbacks(myRunnable)
-        try {
-            if (mService != null) {
-                unbindService(mServiceConn1)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        billingManager?.disconnect()
     }
 
     override fun adLoadingFailed() {
@@ -206,7 +127,7 @@ class SplashActivity : AppCompatActivity(), AdsCallback {
             startNextActivity(0)
         }
     }
-    private val handler = Handler()
+    private val handler = Handler(Looper.getMainLooper())
 
     override fun onStop() {
         Log.e("TAG", "onStop:Handler:::::: " )

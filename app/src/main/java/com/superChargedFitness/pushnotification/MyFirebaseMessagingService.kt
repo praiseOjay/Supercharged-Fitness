@@ -10,7 +10,6 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Canvas
 import android.media.RingtoneManager
-import android.os.AsyncTask
 import android.os.Build
 import android.os.StrictMode
 import android.provider.Settings
@@ -24,8 +23,11 @@ import com.google.firebase.messaging.RemoteMessage
 import com.google.gson.Gson
 import com.superChargedFitness.R
 import com.superChargedFitness.activity.HomeActivity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.io.IOException
 import java.net.MalformedURLException
 import java.net.URL
 
@@ -252,64 +254,32 @@ public class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
 
-    lateinit var icon1: Bitmap
-    lateinit var icon2: Bitmap
-    lateinit var icon: Bitmap
-
     var arrOfBitmap = ArrayList<Bitmap>()
 
-    @SuppressLint("StaticFieldLeak")
-    inner class DownloadImageBitmap(var stringUrl: String) : AsyncTask<String, Void, Void>() {
-
-        override fun doInBackground(vararg strings: String): Void? {
-            var url: URL? = null
+    private fun downloadImages(image1Url: String, image2Url: String) {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
-                url = URL(stringUrl)
-                icon1 = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                arrOfBitmap.add(icon1)
-            } catch (e: MalformedURLException) {
-                e.printStackTrace()
-            } catch (e: IOException) {
+                val url1 = URL(image1Url)
+                val bmp1 = BitmapFactory.decodeStream(url1.openConnection().getInputStream())
+                arrOfBitmap.add(bmp1)
+
+                val url2 = URL(image2Url)
+                val bmp2 = BitmapFactory.decodeStream(url2.openConnection().getInputStream())
+                arrOfBitmap.add(bmp2)
+
+                val combinedIcon = combineImages(bmp1, bmp2)
+                withContext(Dispatchers.Main) {
+                    fireNotification(combinedIcon)
+                }
+            } catch (e: Exception) {
                 e.printStackTrace()
             }
-            return null
-        }
-
-        override fun onPostExecute(result: Void?) {
-            super.onPostExecute(result)
-            Download1ImageBitmap(arrOfImage[1]).execute()
         }
     }
 
-
-    @SuppressLint("StaticFieldLeak")
-    inner class Download1ImageBitmap(var stringUrl: String) : AsyncTask<String, Void, Void>() {
-
-        override fun doInBackground(vararg strings: String): Void? {
-            var url: URL? = null
-            try {
-                url = URL(stringUrl)
-                icon2 = BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                arrOfBitmap.add(icon2)
-                icon = combineImages(arrOfBitmap.get(0), arrOfBitmap.get(1))
-                fireNotification(icon)
-            } catch (e: MalformedURLException) {
-                e.printStackTrace()
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-            return null
-        }
-    }
-
-    fun fireNotification(iconNotification: Bitmap) {
+    fun fireNotification(iconNotification: Bitmap?) {
         val NOTIFICATION_ID = 2155321
-        var icon: Bitmap? = null
-        if (iconNotification != null) {
-            icon = iconNotification
-        } else {
-            icon = BitmapFactory.decodeResource(context.resources, R.drawable.splash)
-        }
+        val icon: Bitmap = iconNotification ?: BitmapFactory.decodeResource(context.resources, R.drawable.splash)
 
 
 

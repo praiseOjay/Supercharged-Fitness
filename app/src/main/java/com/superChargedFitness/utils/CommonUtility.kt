@@ -7,6 +7,7 @@ import android.text.format.DateFormat
 import android.util.Log
 import com.superChargedFitness.R
 import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.pow
@@ -104,7 +105,7 @@ object CommonUtility {
     }
 
     fun calcInFromInch(inch: Double): Double {
-        return BigDecimal(inch % 12.0).setScale(1, 6).toDouble()
+        return BigDecimal(inch % 12.0).setScale(1, RoundingMode.HALF_UP).toDouble()
     }
 
     fun unitFormat(i: Int): String {
@@ -168,7 +169,7 @@ object CommonUtility {
 
 
     fun rateUs(context: Context) {
-        val appPackageName = context.getPackageName()
+        val appPackageName = context.packageName
         try {
             context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackageName")))
         } catch (anfe: android.content.ActivityNotFoundException) {
@@ -182,7 +183,6 @@ object CommonUtility {
     }
 
     fun openUrl(content: Context, strUrl: String) {
-        val appPackageName = content.getPackageName() // getPackageName() from Context or Activity object
         try {
             content.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(strUrl)))
         } catch (e: android.content.ActivityNotFoundException) {
@@ -242,29 +242,26 @@ object CommonUtility {
 
     fun getStringToMilli(strDt: String): Long {
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val date = formatter.parse(strDt) as Date
-        val mills = date.time
-        return mills
+        val date = formatter.parse(strDt)
+        return date?.time ?: 0L
     }
 
     fun getStringToDate(strDt: String): Date {
         val formatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val date = formatter.parse(strDt) as Date
-        return date
+        return formatter.parse(strDt) ?: Date()
     }
 
     fun convertFullDateToDate(strDate: String): String {
         val originalFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         val targetFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val date = originalFormat.parse(strDate)
-        return targetFormat.format(date)
+        return if (date != null) targetFormat.format(date) else ""
     }
 
     fun getFullDateStringToMilliSecond(strDt: String): Long {
         val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val date = formatter.parse(strDt) as Date
-        val mills = date.time
-        return mills
+        val date = formatter.parse(strDt)
+        return date?.time ?: 0L
     }
 
 

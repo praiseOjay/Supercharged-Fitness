@@ -17,11 +17,11 @@ import com.bumptech.glide.Glide
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.superChargedFitness.R
+import com.superChargedFitness.databinding.ActivityNextPrevDetailsWorkoutBinding
 import com.superChargedFitness.interfaces.AdsCallback
 import com.superChargedFitness.pojo.PWorkOutDetails
 import com.superChargedFitness.utils.CommonConstantAd
 import com.superChargedFitness.utils.ConstantString
-import kotlinx.android.synthetic.main.activity_next_prev_details_workout.*
 import java.util.*
 
 class NextPrevDetailsWorkoutActivity : BaseActivity() {
@@ -35,10 +35,12 @@ class NextPrevDetailsWorkoutActivity : BaseActivity() {
     private var recycleWorkIndicatorAdapter: RecycleWorkIndicatorAdapter? = null
     private var flagTimerPause: Boolean = false
     var adClickCount: Int = 1
+    private lateinit var binding: ActivityNextPrevDetailsWorkoutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_next_prev_details_workout)
+        binding = ActivityNextPrevDetailsWorkoutBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         mContext = this
 
@@ -80,63 +82,32 @@ class NextPrevDetailsWorkoutActivity : BaseActivity() {
 
     fun indicator(){
         recycleWorkIndicatorAdapter = RecycleWorkIndicatorAdapter()
-        val layoutManager = FlexboxLayoutManager()
-        layoutManager.flexWrap = FlexWrap.NOWRAP
-        rcyWorkoutStatus.layoutManager = layoutManager
-        rcyWorkoutStatus.adapter = recycleWorkIndicatorAdapter
+        val layoutManager = FlexboxLayoutManager(this)
+        layoutManager.setFlexWrap(FlexWrap.NOWRAP)
+        binding.rcyWorkoutStatus.layoutManager = layoutManager
+        binding.rcyWorkoutStatus.adapter = recycleWorkIndicatorAdapter
     }
 
-    /* Todo here define adapter */
-    inner class RecycleWorkIndicatorAdapter : RecyclerView.Adapter<RecycleWorkIndicatorAdapter.ViewHolder>() {
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(mContext).inflate(R.layout.row_of_recycleview, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-
-            if (viewpagerCurrentItem > position) {
-                holder.viewIndicator.background = ContextCompat.getDrawable(mContext, R.drawable.view_line_theme)
-            } else {
-                holder.viewIndicator.background = ContextCompat.getDrawable(mContext, R.drawable.view_line_gray)
-            }
-        }
-
-        override fun getItemCount(): Int {
-            return pWorkoutList.size
-        }
-
-        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-            internal var viewIndicator: View = itemView.findViewById(R.id.viewIndicator) as View
-
-//            init {
-//                viewIndicator = itemView.findViewById(R.id.viewIndicator) as View
-//            }
-
-        }
-    }
 
 
     /* Todo common methods */
     private fun defaultSetup() {
 //        Utils.initAdd(mContext,adView)
 
-        progressBar.progress = 30
-        progressBar.max = 30
-        progressBar.secondaryProgress = 30
+        binding.progressBar.progress = 30
+        binding.progressBar.max = 30
+        binding.progressBar.secondaryProgress = 30
 
         if (pWorkoutList[workoutPos].time == ConstantString.workout_type_step) {
-            txtWorkoutTime.text = "x".plus(pWorkoutList[workoutPos].time)
+            binding.txtWorkoutTime.text = "x".plus(pWorkoutList[workoutPos].time)
         } else {
-            txtWorkoutTime.text = pWorkoutList[workoutPos].time
+            binding.txtWorkoutTime.text = pWorkoutList[workoutPos].time
         }
 
-        txtWorkoutName.text = pWorkoutList[workoutPos].title
-        txtSteps.text = workoutPos.toString().plus(" / ").plus(pWorkoutList.size)
+        binding.txtWorkoutName.text = pWorkoutList[workoutPos].title
+        binding.txtSteps.text = workoutPos.toString().plus(" / ").plus(pWorkoutList.size)
 
-        viewfliperWorkout.removeAllViews()
+        binding.viewfliperWorkout.removeAllViews()
         val listImg: ArrayList<String> = com.superChargedFitness.utils.Utils.getAssetItems(mContext, com.superChargedFitness.utils.Utils.ReplaceSpacialCharacters(pWorkoutList[workoutPos].title))
 
         for (i in 0 until listImg.size) {
@@ -144,16 +115,16 @@ class NextPrevDetailsWorkoutActivity : BaseActivity() {
 //            Glide.with(mContext).load("//android_asset/burpee/".plus(i.toString()).plus(".png")).into(imgview)
             Glide.with(mContext).load(listImg.get(i)).into(imgview)
             imgview.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-            viewfliperWorkout.addView(imgview)
+            binding.viewfliperWorkout.addView(imgview)
         }
 
-        viewfliperWorkout.isAutoStart = true
-        viewfliperWorkout.setFlipInterval(mContext.resources.getInteger(R.integer.viewfliper_animation))
-        viewfliperWorkout.startFlipping()
+        binding.viewfliperWorkout.isAutoStart = true
+        binding.viewfliperWorkout.setFlipInterval(mContext.resources.getInteger(R.integer.viewfliper_animation))
+        binding.viewfliperWorkout.startFlipping()
     }
 
     private fun setAction(){
-       btnSkip.setOnClickListener {
+       binding.btnSkip.setOnClickListener {
             timer?.cancel()
             finish()
         }
@@ -181,8 +152,8 @@ class NextPrevDetailsWorkoutActivity : BaseActivity() {
                         if (!flagTimerPause) {
 
                             timeCountDown--
-                            txtCountDown.text = timeCountDown.toString()
-                            progressBar.progress = timeCountDown
+                            binding.txtCountDown.text = timeCountDown.toString()
+                            binding.progressBar.progress = timeCountDown
                             if (timeCountDown == 0) {
                                 finish()
                             }
@@ -299,4 +270,38 @@ class NextPrevDetailsWorkoutActivity : BaseActivity() {
         finish()
         dialog.dismiss()
     }
+
+    /* Todo here define adapter */
+    inner class RecycleWorkIndicatorAdapter : RecyclerView.Adapter<RecycleWorkIndicatorAdapter.ViewHolder>() {
+
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+            val view = LayoutInflater.from(mContext).inflate(R.layout.row_of_recycleview, parent, false)
+            return ViewHolder(view)
+        }
+
+        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+
+
+            if (viewpagerCurrentItem > position) {
+                holder.viewIndicator.background = ContextCompat.getDrawable(mContext, R.drawable.view_line_theme)
+            } else {
+                holder.viewIndicator.background = ContextCompat.getDrawable(mContext, R.drawable.view_line_gray)
+            }
+        }
+
+        override fun getItemCount(): Int {
+            return pWorkoutList.size
+        }
+
+        inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+            internal var viewIndicator: View = itemView.findViewById(R.id.viewIndicator) as View
+
+//            init {
+//                viewIndicator = itemView.findViewById(R.id.viewIndicator) as View
+//            }
+
+        }
+    }
+
+
 }

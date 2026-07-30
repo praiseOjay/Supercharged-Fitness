@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "934328822036",
     "project_id": "superchargedfitness-f55cd",
-    "storage_bucket": "superchargedfitness-f55cd.appspot.com"
+    "storage_bucket": "superchargedfitness-f55cd.firebasestorage.app"
   },
   "client": [
     {
@@ -20,7 +20,7 @@
       ],
       "api_key": [
         {
-          "current_key": ""
+          "current_key": "AIzaSyD6x03Om3Fct_SMAes455w9BfDVePmNHeE"
         }
       ],
       "services": {

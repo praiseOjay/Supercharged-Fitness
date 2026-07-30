@@ -9,15 +9,16 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.FrameLayout
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.superChargedFitness.R
 import com.superChargedFitness.adapter.WorkoutListAdapter
-import com.superChargedFitness.database.DataHelper
+import com.superChargedFitness.databinding.ActivityWorkoutListBinding
 import com.superChargedFitness.interfaces.AdsCallback
 import com.superChargedFitness.pojo.PWorkOutCategory
 import com.superChargedFitness.pojo.PWorkOutDetails
 import com.superChargedFitness.utils.ConstantString
-import kotlinx.android.synthetic.main.activity_workout_list.*
+import com.superChargedFitness.viewmodel.WorkoutListViewModel
 
 class WorkoutListActivity : BaseActivity(), AdsCallback {
 
@@ -25,16 +26,18 @@ class WorkoutListActivity : BaseActivity(), AdsCallback {
     private lateinit var pWorkOutCategory: PWorkOutCategory
     private lateinit var workOutDetailData: ArrayList<PWorkOutDetails>
     var adClickCount: Int = 1
+    private lateinit var binding: ActivityWorkoutListBinding
+    private val viewModel: WorkoutListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        setContentView(R.layout.activity_workout_list)
+        binding = ActivityWorkoutListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         Log.e("TAG", "onCreate::::Getnavigationsize:::  "+getNavigationSize(this) )
-        val param = llMain.layoutParams as FrameLayout.LayoutParams
+        val param = binding.llMain.layoutParams as FrameLayout.LayoutParams
         param.setMargins(0, 0, 0, getNavigationSize(this))
-        llMain.layoutParams = param
+        binding.llMain.layoutParams = param
 
         if (Build.VERSION.SDK_INT >= 23) {
             Log.e("TAG", "onCreate::::223 "+ Build.VERSION.SDK_INT)
@@ -48,65 +51,44 @@ class WorkoutListActivity : BaseActivity(), AdsCallback {
 
         defaultSetup()
         initAction()
-
-       /* if (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "") == ConstantString.AD_GOOGLE &&
-                com.superChargedFitness.utils.Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, "") == ConstantString.ENABLE) {
-            CommonConstantAd.loadBannerGoogleAd(this, llAdView, ConstantString.GOOGLE_BANNER_TYPE_AD)
-//            llAdViewFacebook.visibility = View.GONE
-//            llAdView.visibility = View.VISIBLE
-        } else if (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "") == ConstantString.AD_FACEBOOK
-                &&
-                com.superChargedFitness.utils.Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, "") == ConstantString.ENABLE) {
-//            llAdViewFacebook.visibility = View.VISIBLE
-//            llAdView.visibility = View.GONE
-            CommonConstantAd.loadFacebookBannerAd(this, llAdViewFacebook)
-        } else {
-            llAdView.visibility = View.GONE
-            llAdViewFacebook.visibility = View.GONE
-        }*/
-
     }
 
 
 
     /* Todo common methods */
     private fun defaultSetup() {
-        txtWorkoutListCategoryName.text = pWorkOutCategory.catName
-        txtWorkoutListCategoryDetails.text = pWorkOutCategory.catSubCategory
-        imgToolbarBack.setImageResource(pWorkOutCategory.catImage)
+        binding.txtWorkoutListCategoryName.text = pWorkOutCategory.catName
+        binding.txtWorkoutListCategoryDetails.text = pWorkOutCategory.catSubCategory
+        binding.imgToolbarBack.setImageResource(pWorkOutCategory.catImage)
 
         when {
-            ConstantString.biginner == pWorkOutCategory.catDefficultyLevel -> imgWorkoutDificultyImage.setImageResource(R.drawable.ic_beginner_level)
-            ConstantString.intermediate == pWorkOutCategory.catDefficultyLevel -> imgWorkoutDificultyImage.setImageResource(R.drawable.ic_intermediate_level)
-            ConstantString.advance == pWorkOutCategory.catDefficultyLevel -> imgWorkoutDificultyImage.setImageResource(R.drawable.ic_advanced_level)
-            else -> imgWorkoutDificultyImage.visibility = View.GONE
+            ConstantString.biginner == pWorkOutCategory.catDefficultyLevel -> binding.imgWorkoutDificultyImage.setImageResource(R.drawable.ic_beginner_level)
+            ConstantString.intermediate == pWorkOutCategory.catDefficultyLevel -> binding.imgWorkoutDificultyImage.setImageResource(R.drawable.ic_intermediate_level)
+            ConstantString.advance == pWorkOutCategory.catDefficultyLevel -> binding.imgWorkoutDificultyImage.setImageResource(R.drawable.ic_advanced_level)
+            else -> binding.imgWorkoutDificultyImage.visibility = View.GONE
         }
 
-        val data = DataHelper(mContext)
-        workOutDetailData = data.getWorkOutDetails(pWorkOutCategory.catTableName)
+        binding.rcyWorkoutList.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
 
-        rcyWorkoutList.layoutManager = LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false)
-        //rcyWorkoutList.addItemDecoration(Utils.SimpleDividerItemDecoration(this))
+        // Observe workout details from ViewModel (loaded via Room)
+        viewModel.workoutDetails.observe(this) { details ->
+            workOutDetailData = details
+            val workoutListAdapter = WorkoutListAdapter(mContext, workOutDetailData)
+            binding.rcyWorkoutList.adapter = workoutListAdapter
+        }
 
-        val workoutListAdapter = WorkoutListAdapter(mContext, workOutDetailData)
-        rcyWorkoutList.adapter = workoutListAdapter
-
+        // Load data via ViewModel
+        viewModel.loadWorkoutDetails(pWorkOutCategory.catTableName)
     }
 
     private fun initAction() {
-        imgWorkOutListBack.setOnClickListener {
+        binding.imgWorkOutListBack.setOnClickListener {
             finish()
         }
-        btnStartWorkout.setOnClickListener {
+        binding.btnStartWorkout.setOnClickListener {
             if (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.START_BTN_COUNT, 1) == 1) {
                 if (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.STATUS_ENABLE_DISABLE, "") == ConstantString.ENABLE) {
                     when (com.superChargedFitness.utils.Utils.getPref(this, ConstantString.AD_TYPE_FB_GOOGLE, "")) {
-                        //ConstantString.AD_GOOGLE -> {
-                            //CommonConstantAd.showInterstitialAdsGoogle(this,this)
-                        //}
-                        //ConstantString.AD_FACEBOOK -> {
-                            //CommonConstantAd.showInterstitialAdsFacebook(this)
-                        //}
                         else -> {
                             startExerciseActivity()
                         }
@@ -125,10 +107,16 @@ class WorkoutListActivity : BaseActivity(), AdsCallback {
     }
 
     private fun startExerciseActivity(){
-        val intent = Intent(mContext, WorkoutActivity::class.java)
-        intent.putExtra(ConstantString.workout_list, workOutDetailData)
-        intent.putExtra(ConstantString.work_table_name, pWorkOutCategory.catTableName)
-        startActivity(intent)
+        Log.d("WorkoutListActivity", "startExerciseActivity called")
+        if (::workOutDetailData.isInitialized) {
+            Log.d("WorkoutListActivity", "Starting WorkoutActivity with ${workOutDetailData.size} workouts")
+            val intent = Intent(mContext, WorkoutActivity::class.java)
+            intent.putExtra(ConstantString.workout_list, workOutDetailData)
+            intent.putExtra(ConstantString.work_table_name, pWorkOutCategory.catTableName)
+            startActivity(intent)
+        } else {
+            Log.e("WorkoutListActivity", "workOutDetailData not initialized!")
+        }
     }
 
     override fun adLoadingFailed() {
