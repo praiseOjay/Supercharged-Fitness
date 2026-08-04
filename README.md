@@ -2,6 +2,14 @@
 
 An Android mobile fitness application designed to improve people's health and fitness lifestyles through their smartphones. This app encourages and teaches users how to perform various bodyweight exercises correctly.
 
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/home_screen.png" width="30%" />
+  <img src="screenshots/workout_list.png" width="30%" />
+  <img src="screenshots/active_workout.png" width="30%" />
+</p>
+
 ## Features
 
 - Multiple workout programs for different body parts and difficulty levels
@@ -13,17 +21,28 @@ An Android mobile fitness application designed to improve people's health and fi
 
 ## Technologies Used
 
-- Kotlin
-- Android Studio
-- SQLite (for local data storage)
-- Firebase Test Lab (for testing)
-- Firebase Performance Monitoring
+- **Language:** Kotlin
+- **UI Framework:** Android View System (XML)
+- **Database:** Room Persistence Library (SQLite)
+- **Architecture:** Model-View-Controller (MVC)
+- **Dependency Management:** Gradle
+- **Annotation Processing:** KSP
+- **External Services:** 
+    - Firebase (Analytics, Messaging, Performance Monitoring, Test Lab)
+    - Google Play Services (Ads, Billing)
+- **Libraries:**
+    - Lottie (for animations)
+    - Glide (for image loading)
+    - Retrofit & Gson (for networking)
+    - WorkManager (for background tasks)
+    - CircularProgressIndicator
 
 ## Architecture and Design Patterns
 
-- Model-View-Controller (MVC) architecture
-- Factory Pattern for creating exercise objects
-- Delegation Pattern for handling user input
+- **Model-View-ViewModel (MVVM)** architecture for better separation of concerns and testability.
+- **Factory Pattern** for creating exercise objects.
+- **Repository Pattern** for data management (Room).
+- **Observer Pattern** using LiveData/StateFlow for UI updates.
 
 ## Key Components
 
@@ -36,7 +55,7 @@ An Android mobile fitness application designed to improve people's health and fi
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/supercharged-fitness-app.git
+   git clone https://github.com/praiseOjay/Supercharged-Fitness.git
    ```
 2. Open the project in Android Studio
 3. Build and run the application on an Android device or emulator
